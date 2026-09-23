@@ -35,21 +35,16 @@ app.use('/api/doctors', require('./routes/doctors'));
 app.use('/api/appointments', require('./routes/appointments'));
 app.use('/api/patients', require('./routes/patients'));
 
-// Serving Frontend Static Files
-const buildPath = path.join(__dirname, '../frontend/build');
-app.use(express.static(buildPath));
-
-// Health Check
-app.get('/api/health', (req, res) => {
-    res.json({ success: true, message: 'Server is running', timestamp: new Date() });
+// Removed Frontend Static Files Serving for Mobile API deployment
+app.get('/', (req, res) => {
+    res.json({ success: true, message: 'MediBook API is running successfully.' });
 });
 
-// Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
     if (req.originalUrl.startsWith('/api')) {
         return res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
     }
-    res.sendFile(path.join(buildPath, 'index.html'));
+    res.status(404).json({ success: false, message: 'Route not found' });
 });
 
 // Global error handler
