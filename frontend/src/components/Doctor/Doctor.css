@@ -1,0 +1,136 @@
+/* Doctor.css - Baba Design System */
+.doctor-dash-hero {
+    background: var(--color-landing-navy);
+    border-radius: var(--radius-landing-card-lg);
+    padding: 40px;
+    margin-bottom: 32px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(25, 52, 134, 0.2);
+}
+
+.doctor-dash-hero h1, .doctor-dash-hero h2 {
+    color: white;
+}
+
+.doctor-dash-hero p {
+    color: #bcccd4;
+}
+
+.queue-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-landing-card);
+    padding: 24px;
+    text-align: center;
+    transition: all 0.25s ease;
+    box-shadow: var(--card-shadow);
+}
+
+.queue-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--color-landing-red-cta);
+}
+
+.queue-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.patient-queue-row {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-landing-card-sm);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.25s ease;
+    box-shadow: var(--card-shadow);
+}
+
+.patient-queue-row:hover {
+    border-color: var(--color-landing-red-cta);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.queue-token-badge {
+    min-width: 60px;
+    background: var(--color-landing-red-cta);
+    border-radius: var(--radius-sm);
+    padding: 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+}
+
+.complete-modal {
+    padding: 20px 0;
+}
+
+.presc-row {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    margin-bottom: 10px;
+}
+
+/* Schedule Manager */
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.day-btn {
+    padding: 14px 6px;
+    border-radius: var(--radius-landing-pill);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.day-btn.active {
+    background: var(--color-landing-red-cta);
+    border-color: var(--color-landing-red-cta);
+    color: white;
+    box-shadow: 0 4px 12px rgba(234, 17, 17, 0.3);
+}
+
+.day-btn:hover:not(.active) {
+    border-color: var(--color-landing-red-cta);
+    color: var(--color-landing-red-cta);
+}
+
+.shift-editor {
+    background: var(--color-landing-cream-warm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-landing-card-sm);
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.break-item {
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}

@@ -1,0 +1,212 @@
+/* Patient.css - Baba Design System */
+.dashboard-hero {
+    background: var(--color-landing-red-cta);
+    border-radius: var(--radius-landing-card-lg);
+    padding: 48px;
+    margin-bottom: 36px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(234, 17, 17, 0.25);
+}
+
+.dashboard-hero p {
+    color: var(--color-landing-blush);
+}
+
+.dashboard-welcome {
+    font-size: 2.25rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: white;
+    letter-spacing: -1px;
+}
+
+.dashboard-welcome span {
+    color: var(--color-landing-blush);
+}
+
+.upcoming-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 18px;
+    border-radius: var(--radius-landing-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.quick-action-btn {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-landing-card);
+    padding: 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: block;
+    box-shadow: var(--card-shadow);
+}
+
+.quick-action-btn:hover {
+    border-color: var(--color-landing-red-cta);
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.quick-action-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.quick-action-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Doctor Search */
+.search-filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    padding: 8px 18px;
+    border-radius: var(--radius-landing-pill);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    border-color: var(--color-landing-red-cta);
+    background: var(--color-landing-red-cta);
+    color: white;
+}
+
+/* Booking Modal */
+.booking-step {
+    animation: fadeInUp 0.35s ease;
+}
+
+.confirm-box {
+    background: var(--color-landing-cream-warm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-landing-card-sm);
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.confirm-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.confirm-row:last-child {
+    border-bottom: none;
+}
+
+.confirm-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.confirm-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* History page */
+.history-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.prescription-card {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 12px;
+}
+
+.appointment-detail-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.appointment-detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    min-width: 120px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.detail-value {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+/* Profile page */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.medical-tag {
+    background: var(--color-landing-blush);
+    border: 1px solid #fca5a5;
+    color: var(--color-landing-red-deep);
+    padding: 6px 14px;
+    border-radius: var(--radius-landing-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.medical-tag .remove-btn {
+    background: none;
+    border: none;
+    color: var(--color-landing-red-deep);
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0;
+    margin-left: 4px;
+}
+
+.tag-input-row {
+    display: flex;
+    gap: 8px;
+}

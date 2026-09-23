@@ -1,0 +1,83 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+.npm-bin/
+nodejs/
+node.zip
+
+# =========================
+# Build / Output
+# =========================
+frontend/build/
+dist/
+build/
+*.tsbuildinfo
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# =========================
+# Database (runtime)
+# =========================
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite-journal
+
+# =========================
+# Logs
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.ps1
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# =========================
+# Cache
+# =========================
+.cache/
+.eslintcache
+.parcel-cache/
+
+# =========================
+# Android (Capacitor generated)
+# =========================
+frontend/android/
+*.apk
+
+# =========================
+# Testing
+# =========================
+coverage/
+
+# =========================
+# Misc
+# =========================
+*.tgz
+.env.production
