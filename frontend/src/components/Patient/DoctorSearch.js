@@ -175,7 +175,7 @@ const DoctorSearch = () => {
                             <div className="booking-step">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                                     <p style={{ color: '#94a3b8', fontSize: '0.88rem' }}>
-                                        {new Date(date).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}
+                                        {new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}
                                     </p>
                                     <button style={{ background: 'none', border: 'none', color: '#a78bfa', cursor: 'pointer', fontSize: '0.85rem' }} onClick={() => setStep(1)}>← Change Date</button>
                                 </div>
@@ -207,7 +207,7 @@ const DoctorSearch = () => {
                             <div className="booking-step">
                                 <div className="confirm-box">
                                     <div className="confirm-row"><span className="confirm-label">Doctor</span><span className="confirm-value">Dr. {selectedDoc.firstName} {selectedDoc.lastName}</span></div>
-                                    <div className="confirm-row"><span className="confirm-label">Date</span><span className="confirm-value">{new Date(date).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}</span></div>
+                                    <div className="confirm-row"><span className="confirm-label">Date</span><span className="confirm-value">{new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}</span></div>
                                     <div className="confirm-row"><span className="confirm-label">Time</span><span className="confirm-value">{selectedSlot?.startTime} – {selectedSlot?.endTime}</span></div>
                                     <div className="confirm-row"><span className="confirm-label">Fee</span><span className="confirm-value" style={{ color: '#10b981' }}>₹{selectedDoc.consultationFee}</span></div>
                                 </div>

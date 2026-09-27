@@ -95,13 +95,27 @@ router.get('/:id/available-slots', async (req, res) => {
         const { date } = req.query;
         if (!date) return res.status(400).json({ success: false, message: 'Date is required' });
 
-        const targetDate = new Date(date);
-        const dayOfWeek = targetDate.getDay();
+        const [year, month, day] = date.split('-').map(Number);
+        const dayOfWeek = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
 
         let schedule = await getDb().get('SELECT * FROM schedules WHERE doctorId = ? AND dayOfWeek = ?', req.params.id, dayOfWeek);
-        if (!schedule) return res.json({ success: true, count: 0, data: [] });
-
-        schedule = parseJSONFields(schedule, ['shifts']);
+        
+        let shifts = [];
+        if (schedule) {
+            schedule = parseJSONFields(schedule, ['shifts']);
+            shifts = schedule.shifts || [];
+        } else {
+            // Default shift for doctors if specific day schedule is not configured
+            shifts = [{
+                shiftName: 'Morning',
+                startTime: '09:00',
+                endTime: '13:00',
+                slotDuration: 30,
+                breakTimes: [{ startTime: '11:00', endTime: '11:15', breakType: 'tea' }],
+                maxPatientsPerSlot: 1,
+                isActive: true
+            }];
+        }
 
         const bookedAppointments = await getDb().all(`
             SELECT timeSlotStart FROM appointments 
@@ -111,8 +125,8 @@ router.get('/:id/available-slots', async (req, res) => {
         const bookedTimes = new Set(bookedAppointments.map(a => a.timeSlotStart));
 
         const slots = [];
-        if (schedule.shifts && Array.isArray(schedule.shifts)) {
-            for (const shift of schedule.shifts) {
+        if (shifts && Array.isArray(shifts)) {
+            for (const shift of shifts) {
                 if (!shift.isActive) continue;
 
                 const shiftStart = timeToMinutes(shift.startTime);

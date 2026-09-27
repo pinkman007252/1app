@@ -49,9 +49,8 @@ router.post('/', protect, authorize('patient'), async (req, res) => {
             return res.status(400).json({ success: false, message: 'doctorId, appointmentDate, and timeSlot are required' });
         }
 
-        const apptDate = new Date(appointmentDate);
-        const today = new Date(); today.setHours(0, 0, 0, 0);
-        if (apptDate < today) {
+        const todayStr = new Date().toISOString().split('T')[0];
+        if (appointmentDate < todayStr) {
             return res.status(400).json({ success: false, message: 'Cannot book appointments for past dates' });
         }
 
