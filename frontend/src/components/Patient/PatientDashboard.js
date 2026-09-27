@@ -36,7 +36,7 @@ const PatientDashboard = () => {
                 <div className="dashboard-hero">
                     <div className="upcoming-tag">🌟 Welcome Back</div>
                     <h1 className="dashboard-welcome">Hello, <span>{profile?.firstName || 'Patient'}</span>!</h1>
-                    <p style={{ color: '#94a3b8', marginTop: '8px', fontSize: '1.05rem' }}>Manage your health appointments with ease</p>
+                    <p style={{ color: 'var(--color-accent-soft)', marginTop: '8px', fontSize: '1.05rem' }}>Manage your health appointments with ease</p>
                     <div style={{ display: 'flex', gap: '12px', marginTop: '20px', flexWrap: 'wrap' }}>
                         <Link to="/search-doctors" className="btn btn-primary">🔍 Find a Doctor</Link>
                         <Link to="/history" className="btn btn-secondary">📋 View All Appointments</Link>
@@ -60,7 +60,7 @@ const PatientDashboard = () => {
                 </div>
 
                 {/* Quick Actions */}
-                <h2 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '16px', color: '#f1f5f9' }}>Quick Actions</h2>
+                <h2 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '16px', color: 'var(--color-ink)' }}>Quick Actions</h2>
                 <div className="grid-4" style={{ marginBottom: '32px' }}>
                     {[
                         { to: '/search-doctors', icon: '🔍', label: 'Find Doctors' },
@@ -77,8 +77,8 @@ const PatientDashboard = () => {
 
                 {/* Upcoming Appointments */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                    <h2 style={{ fontSize: '1.3rem', fontWeight: '700', color: '#f1f5f9' }}>Upcoming Appointments</h2>
-                    <Link to="/history" style={{ color: '#a78bfa', fontSize: '0.85rem', textDecoration: 'none', fontWeight: '600' }}>View All →</Link>
+                    <h2 style={{ fontSize: '1.3rem', fontWeight: '700', color: 'var(--color-ink)' }}>Upcoming Appointments</h2>
+                    <Link to="/history" style={{ color: 'var(--color-primary-cta)', fontSize: '0.85rem', textDecoration: 'none', fontWeight: '700' }}>View All →</Link>
                 </div>
 
                 {loading ? (
@@ -101,17 +101,17 @@ const PatientDashboard = () => {
                                         <div className="appointment-month">{date.month}</div>
                                     </div>
                                     <div style={{ flex: 1 }}>
-                                        <div style={{ fontWeight: '700', color: '#f1f5f9', fontSize: '1rem' }}>
+                                        <div style={{ fontWeight: '700', color: 'var(--color-ink)', fontSize: '1rem' }}>
                                             Dr. {appt.doctorId?.firstName} {appt.doctorId?.lastName}
                                         </div>
-                                        <div style={{ color: '#67e8f9', fontSize: '0.83rem', fontWeight: '500' }}>{appt.doctorId?.specialization}</div>
-                                        <div style={{ color: '#64748b', fontSize: '0.82rem', marginTop: '4px' }}>
+                                        <div style={{ color: 'var(--color-secondary-deep)', fontSize: '0.83rem', fontWeight: '600' }}>{appt.doctorId?.specialization}</div>
+                                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', marginTop: '4px' }}>
                                             🕐 {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}
                                         </div>
                                     </div>
                                     <div style={{ textAlign: 'right' }}>
                                         <span className={`badge ${getBadgeClass(appt.status)}`}>{appt.status}</span>
-                                        <div style={{ color: '#a78bfa', fontSize: '0.78rem', marginTop: '6px', fontWeight: '600' }}>Token: {appt.tokenNumber?.split('-').pop()}</div>
+                                        <div style={{ color: 'var(--color-primary-cta)', fontSize: '0.78rem', marginTop: '6px', fontWeight: '700' }}>Token: {appt.tokenNumber?.split('-').pop()}</div>
                                     </div>
                                 </div>
                             );

@@ -1,38 +1,71 @@
-/* Doctor.css - Baba Design System */
+/* Doctor.css - Teal & Coral Design System */
+
 .doctor-dash-hero {
-    background: var(--color-landing-navy);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-deep) 100%);
     border-radius: var(--radius-landing-card-lg);
-    padding: 40px;
-    margin-bottom: 32px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
     color: white;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 16px 40px rgba(25, 52, 134, 0.2);
+    box-shadow: 0 16px 40px rgba(216, 90, 48, 0.22);
 }
 
-.doctor-dash-hero h1, .doctor-dash-hero h2 {
+.doctor-dash-hero h1, .doctor-dash-hero h2, .doctor-dash-hero .hero-title {
     color: white;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin: 8px 0 4px;
 }
 
-.doctor-dash-hero p {
-    color: #bcccd4;
+.doctor-dash-hero p, .doctor-dash-hero .hero-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+}
+
+.hero-tag {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 4px 14px;
+    border-radius: var(--radius-landing-pill);
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.hero-date-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 14px;
+    border-radius: var(--radius-landing-pill);
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .queue-card {
     background: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-landing-card);
-    padding: 24px;
+    padding: 20px 16px;
     text-align: center;
     transition: all 0.25s ease;
     box-shadow: var(--card-shadow);
 }
+.queue-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+}
 
 .queue-number {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     font-family: var(--font-heading);
-    color: var(--color-landing-red-cta);
+    color: var(--color-primary);
+    line-height: 1.1;
 }
 
 .queue-label {
@@ -42,88 +75,170 @@
     margin-top: 4px;
 }
 
+/* Patient Queue List */
+.patient-queue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .patient-queue-row {
     background: var(--color-white);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-landing-card-sm);
-    padding: 20px;
+    border-radius: var(--radius-landing-card);
+    padding: 24px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 16px;
     transition: all 0.25s ease;
     box-shadow: var(--card-shadow);
+}
+.patient-queue-row:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .patient-queue-top {
     display: flex;
     align-items: center;
     gap: 16px;
-    flex: 1;
-}
-
-.patient-queue-row:hover {
-    border-color: var(--color-landing-red-cta);
-    box-shadow: var(--card-shadow-hover);
+    width: 100%;
 }
 
 .queue-token-badge {
-    min-width: 60px;
-    background: var(--color-landing-red-cta);
+    min-width: 64px;
+    background: var(--color-accent-soft);
+    border: 1px solid #B8E6D8;
     border-radius: var(--radius-sm);
-    padding: 8px;
+    padding: 8px 10px;
     text-align: center;
-    font-size: 0.75rem;
+    color: var(--color-primary-deep);
+}
+.queue-token-badge.token-badge-secondary {
+    background: #FAECE7;
+    border-color: var(--color-secondary-light);
+    color: var(--color-secondary-deep);
+}
+.token-text {
+    font-size: 0.65rem;
     font-weight: 700;
-    color: white;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
+}
+.token-num {
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    line-height: 1.1;
+    margin-top: 2px;
+}
+
+.patient-queue-info {
+    flex: 1;
+}
+.patient-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 4px;
+}
+.patient-meta-item {
+    font-size: 0.875rem;
+    color: var(--color-ink-soft);
+    margin-top: 2px;
+    font-weight: 500;
+}
+.patient-reason {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 4px;
 }
 
 .patient-queue-actions {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-    flex-shrink: 0;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-complete {
+    background: var(--color-primary-cta) !important;
+    color: white !important;
+    border-radius: var(--radius-landing-pill) !important;
+    min-height: 44px;
+    font-weight: 700;
+}
+.btn-complete:hover {
+    background: var(--color-primary-deep) !important;
+}
+
+/* Schedule Manager */
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.day-btn {
+    padding: 14px 6px;
+    border-radius: var(--radius-landing-pill);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+.day-btn.active {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+    color: white;
+    box-shadow: 0 4px 14px rgba(216, 90, 48, 0.3);
+}
+.day-btn:hover:not(.active) {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+}
+
+.shift-editor {
+    background: var(--color-cream-warm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-landing-card-sm);
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.break-item {
+    background: #FAECE7;
+    border: 1px solid var(--color-secondary-light);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
 @media (max-width: 768px) {
-    .grid-4 {
+    .doctor-stat-grid {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
+        gap: 12px !important;
     }
-    .queue-card {
-        padding: 14px 10px !important;
-    }
-    .queue-number {
-        font-size: 1.8rem !important;
-    }
-    .queue-label {
-        font-size: 0.75rem !important;
+    .days-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
-
-@media (max-width: 640px) {
-    .patient-queue-row {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        padding: 16px !important;
-        gap: 12px !important;
+@media (max-width: 480px) {
+    .days-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
-    .patient-queue-top {
-        align-items: flex-start !important;
-        gap: 12px !important;
-        width: 100% !important;
-    }
-    .patient-queue-actions {
-        width: 100% !important;
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding-top: 12px !important;
-        border-top: 1px solid var(--color-border) !important;
-        margin-top: 4px !important;
+    .doctor-dash-hero {
+        padding: 24px 20px;
     }
 }
 

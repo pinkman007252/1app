@@ -1,17 +1,17 @@
-/* Patient.css - Baba Design System */
+/* Patient.css - Teal Design System */
 .dashboard-hero {
-    background: var(--color-landing-red-cta);
+    background: linear-gradient(135deg, var(--color-primary-cta) 0%, var(--color-primary-deepest) 100%);
     border-radius: var(--radius-landing-card-lg);
-    padding: 48px;
-    margin-bottom: 36px;
+    padding: 44px;
+    margin-bottom: 32px;
     color: white;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 16px 40px rgba(234, 17, 17, 0.25);
+    box-shadow: 0 16px 40px rgba(15, 110, 86, 0.22);
 }
 
 .dashboard-hero p {
-    color: var(--color-landing-blush);
+    color: var(--color-accent-soft);
 }
 
 .dashboard-welcome {
@@ -23,14 +23,14 @@
 }
 
 .dashboard-welcome span {
-    color: var(--color-landing-blush);
+    color: var(--color-accent-soft);
 }
 
 .upcoming-tag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
     padding: 6px 18px;
@@ -44,7 +44,7 @@
     background: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-landing-card);
-    padding: 28px;
+    padding: 24px;
     text-align: center;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -54,7 +54,7 @@
 }
 
 .quick-action-btn:hover {
-    border-color: var(--color-landing-red-cta);
+    border-color: var(--color-primary);
     transform: translateY(-3px);
     box-shadow: var(--card-shadow-hover);
 }
@@ -66,7 +66,7 @@
 
 .quick-action-label {
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
@@ -87,14 +87,14 @@
     font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.2s;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
 }
 
 .filter-chip:hover,
 .filter-chip.active {
-    border-color: var(--color-landing-red-cta);
-    background: var(--color-landing-red-cta);
+    border-color: var(--color-primary-cta);
+    background: var(--color-primary-cta);
     color: white;
 }
 
@@ -104,7 +104,7 @@
 }
 
 .confirm-box {
-    background: var(--color-landing-cream-warm);
+    background: var(--color-cream-warm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-landing-card-sm);
     padding: 24px;
@@ -129,7 +129,7 @@
 }
 
 .confirm-value {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
@@ -142,8 +142,8 @@
 }
 
 .prescription-card {
-    background: #dcfce7;
-    border: 1px solid #86efac;
+    background: #DCFCE7;
+    border: 1px solid #86EFAC;
     border-radius: var(--radius-sm);
     padding: 16px;
     margin-top: 12px;
@@ -167,12 +167,13 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--text-muted);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .detail-value {
     color: var(--text-primary);
     font-size: 0.95rem;
+    font-weight: 600;
 }
 
 /* Profile page */
@@ -184,13 +185,13 @@
 }
 
 .medical-tag {
-    background: var(--color-landing-blush);
-    border: 1px solid #fca5a5;
-    color: var(--color-landing-red-deep);
+    background: var(--color-accent-soft);
+    border: 1px solid #B8E6D8;
+    color: var(--color-primary-deep);
     padding: 6px 14px;
     border-radius: var(--radius-landing-pill);
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -199,7 +200,7 @@
 .medical-tag .remove-btn {
     background: none;
     border: none;
-    color: var(--color-landing-red-deep);
+    color: var(--color-primary-deep);
     cursor: pointer;
     font-size: 0.95rem;
     padding: 0;

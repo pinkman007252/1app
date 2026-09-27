@@ -1,10 +1,10 @@
-/* Auth.css - Baba Design System */
+/* Auth.css - Teal & Coral Design System */
 .auth-page {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 32px 16px;
+    padding: calc(32px + env(safe-area-inset-top, 0px)) 16px 32px;
     background: var(--background);
 }
 
@@ -15,7 +15,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-landing-card-lg);
     padding: 48px;
-    box-shadow: 0 16px 40px rgba(42, 29, 24, 0.08);
+    box-shadow: 0 16px 40px rgba(29, 158, 117, 0.1);
     position: relative;
     overflow: hidden;
     animation: scaleIn 0.35s var(--transition-spring);
@@ -28,7 +28,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--color-landing-red-cta);
+    background: var(--color-primary);
 }
 
 .auth-logo {
@@ -39,7 +39,7 @@
 .auth-logo-icon {
     width: 64px;
     height: 64px;
-    background: var(--color-landing-red-cta);
+    background: var(--color-primary-cta);
     border-radius: var(--radius-lg);
     display: inline-flex;
     align-items: center;
@@ -47,14 +47,14 @@
     font-size: 2rem;
     color: white;
     margin-bottom: 16px;
-    box-shadow: 0 8px 20px rgba(234, 17, 17, 0.25);
+    box-shadow: 0 8px 20px rgba(15, 110, 86, 0.25);
 }
 
 .auth-title {
     font-size: 2rem;
     font-weight: 700;
     font-family: var(--font-heading);
-    color: var(--color-landing-ink);
+    color: var(--color-ink);
     text-align: center;
     letter-spacing: -0.5px;
 }
@@ -71,7 +71,7 @@
     display: flex;
     gap: 6px;
     margin-bottom: 28px;
-    background: var(--color-landing-cream-warm);
+    background: var(--color-cream-warm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-landing-pill);
     padding: 4px;
@@ -86,7 +86,7 @@
     color: var(--text-muted);
     font-family: var(--font-sans);
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
@@ -96,13 +96,13 @@
 }
 
 .role-tab.active {
-    background: var(--color-landing-red-cta);
+    background: var(--color-primary-cta);
     color: white;
-    box-shadow: 0 4px 12px rgba(234, 17, 17, 0.3);
+    box-shadow: 0 4px 12px rgba(15, 110, 86, 0.3);
 }
 
 .role-tab:hover:not(.active) {
-    color: var(--color-landing-red-cta);
+    color: var(--color-primary);
 }
 
 .auth-link {
@@ -113,8 +113,8 @@
 }
 
 .auth-link a {
-    color: var(--color-landing-red-cta);
-    font-weight: 600;
+    color: var(--color-primary-cta);
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -127,7 +127,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--color-landing-navy);
+    color: var(--color-primary-deep);
     margin: 24px 0 14px;
     display: flex;
     align-items: center;

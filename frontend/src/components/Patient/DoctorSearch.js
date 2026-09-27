@@ -79,7 +79,7 @@ const DoctorSearch = () => {
                 ))}
             </div>
 
-            <div style={{ margin: '24px 0 12px', color: '#64748b', fontSize: '0.85rem' }}>
+            <div style={{ margin: '24px 0 12px', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600' }}>
                 {loading ? 'Searching...' : `${filteredDoctors.length} doctor${filteredDoctors.length !== 1 ? 's' : ''} found`}
             </div>
 
@@ -109,7 +109,7 @@ const DoctorSearch = () => {
                                     {doc.diseasesExpertise.length > 3 && <span className="doctor-tag">+{doc.diseasesExpertise.length - 3}</span>}
                                 </div>
                             )}
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '14px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '14px', borderTop: '1px solid var(--color-border)' }}>
                                 <div className="doctor-fee">₹{doc.consultationFee}</div>
                                 <button className="btn btn-primary btn-sm" onClick={e => { e.stopPropagation(); openBooking(doc); }}>Book Now</button>
                             </div>
@@ -131,11 +131,11 @@ const DoctorSearch = () => {
 
                         {/* Doctor summary */}
                         {step < 4 && (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '12px', marginBottom: '20px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px', background: 'var(--color-accent-soft)', border: '1px solid #B8E6D8', borderRadius: '12px', marginBottom: '20px' }}>
                                 <div className="doctor-avatar" style={{ width: '48px', height: '48px', fontSize: '1rem' }}>{selectedDoc.firstName[0]}{selectedDoc.lastName[0]}</div>
                                 <div>
-                                    <div style={{ fontWeight: '700', color: '#f1f5f9' }}>Dr. {selectedDoc.firstName} {selectedDoc.lastName}</div>
-                                    <div style={{ color: '#67e8f9', fontSize: '0.83rem' }}>{selectedDoc.specialization} • ₹{selectedDoc.consultationFee}</div>
+                                    <div style={{ fontWeight: '700', color: 'var(--color-ink)' }}>Dr. {selectedDoc.firstName} {selectedDoc.lastName}</div>
+                                    <div style={{ color: 'var(--color-secondary-deep)', fontSize: '0.83rem', fontWeight: '600' }}>{selectedDoc.specialization} • ₹{selectedDoc.consultationFee}</div>
                                 </div>
                             </div>
                         )}
@@ -174,10 +174,10 @@ const DoctorSearch = () => {
                         {step === 2 && (
                             <div className="booking-step">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                                    <p style={{ color: '#94a3b8', fontSize: '0.88rem' }}>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: '600' }}>
                                         {new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}
                                     </p>
-                                    <button style={{ background: 'none', border: 'none', color: '#a78bfa', cursor: 'pointer', fontSize: '0.85rem' }} onClick={() => setStep(1)}>← Change Date</button>
+                                    <button style={{ background: 'none', border: 'none', color: 'var(--color-primary-cta)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700' }} onClick={() => setStep(1)}>← Change Date</button>
                                 </div>
                                 {slots.length === 0 ? (
                                     <div className="empty-state"><div className="empty-state-icon">📅</div><h3>No slots available</h3><p>Please select a different date</p></div>
@@ -209,7 +209,7 @@ const DoctorSearch = () => {
                                     <div className="confirm-row"><span className="confirm-label">Doctor</span><span className="confirm-value">Dr. {selectedDoc.firstName} {selectedDoc.lastName}</span></div>
                                     <div className="confirm-row"><span className="confirm-label">Date</span><span className="confirm-value">{new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}</span></div>
                                     <div className="confirm-row"><span className="confirm-label">Time</span><span className="confirm-value">{selectedSlot?.startTime} – {selectedSlot?.endTime}</span></div>
-                                    <div className="confirm-row"><span className="confirm-label">Fee</span><span className="confirm-value" style={{ color: '#10b981' }}>₹{selectedDoc.consultationFee}</span></div>
+                                    <div className="confirm-row"><span className="confirm-label">Fee</span><span className="confirm-value" style={{ color: 'var(--color-primary-cta)' }}>₹{selectedDoc.consultationFee}</span></div>
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">Reason for Visit *</label>
@@ -232,12 +232,12 @@ const DoctorSearch = () => {
                         {step === 4 && bookingResult && (
                             <div style={{ textAlign: 'center', padding: '20px 0' }}>
                                 <div style={{ fontSize: '4rem', marginBottom: '16px' }}>🎉</div>
-                                <h2 style={{ fontFamily: 'Outfit,sans-serif', fontWeight: '800', fontSize: '1.6rem', marginBottom: '8px', color: '#f1f5f9' }}>Appointment Booked!</h2>
-                                <p style={{ color: '#94a3b8', marginBottom: '28px' }}>Your appointment has been confirmed successfully</p>
+                                <h2 style={{ fontFamily: 'Quicksand,sans-serif', fontWeight: '700', fontSize: '1.6rem', marginBottom: '8px', color: 'var(--color-ink)' }}>Appointment Booked!</h2>
+                                <p style={{ color: 'var(--text-muted)', marginBottom: '28px' }}>Your appointment has been confirmed successfully</p>
                                 <div className="token-card">
-                                    <p style={{ color: '#94a3b8', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>Your Token Number</p>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>Your Token Number</p>
                                     <div className="token-number">{bookingResult.tokenInfo?.tokenNumber}</div>
-                                    <p style={{ color: '#94a3b8', marginTop: '12px', fontSize: '0.85rem' }}>Queue Position</p>
+                                    <p style={{ color: 'var(--text-muted)', marginTop: '12px', fontSize: '0.85rem' }}>Queue Position</p>
                                     <div className="token-queue">#{bookingResult.tokenInfo?.queuePosition}</div>
                                 </div>
                                 <button className="btn btn-primary btn-full" style={{ marginTop: '24px' }} onClick={closeBooking}>Done</button>
