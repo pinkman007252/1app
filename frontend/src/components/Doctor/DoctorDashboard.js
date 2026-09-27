@@ -95,7 +95,7 @@ const DoctorDashboard = () => {
                     </div>
                 )}
 
-                <h2 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', marginBottom: '16px', color: '#0f172a' }}>
                     📋 Patient Queue {isToday ? '(Today)' : `— ${new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`}
                 </h2>
 
@@ -107,17 +107,19 @@ const DoctorDashboard = () => {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         {appointments.map(appt => (
                             <div key={appt._id} className="patient-queue-row">
-                                <div className="queue-token-badge">
-                                    <div style={{ fontSize: '0.6rem', marginBottom: '2px' }}>TOKEN</div>
-                                    <div style={{ fontSize: '0.85rem' }}>{appt.tokenNumber?.split('-T')[1] || '?'}</div>
-                                </div>
-                                <div className="patient-queue-info" style={{ flex: 1 }}>
-                                    <div style={{ fontWeight: '700', color: 'var(--text-primary)', fontSize: '1.05rem' }}>
-                                        {appt.patientId?.firstName} {appt.patientId?.lastName}
+                                <div className="patient-queue-top">
+                                    <div className="queue-token-badge">
+                                        <div style={{ fontSize: '0.6rem', marginBottom: '2px', opacity: 0.9 }}>TOKEN</div>
+                                        <div style={{ fontSize: '0.9rem', fontWeight: '800' }}>{appt.tokenNumber?.split('-T')[1] || '?'}</div>
                                     </div>
-                                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '2px' }}>📱 {appt.patientId?.phone}</div>
-                                    <div style={{ color: 'var(--color-landing-navy)', fontSize: '0.85rem', marginTop: '2px', fontWeight: '600' }}>⌚ {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
-                                    {appt.reason && <div style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginTop: '4px', fontStyle: 'italic' }}>"{appt.reason}"</div>}
+                                    <div className="patient-queue-info" style={{ flex: 1 }}>
+                                        <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1.1rem' }}>
+                                            {appt.patientId?.firstName} {appt.patientId?.lastName}
+                                        </div>
+                                        <div style={{ color: '#334155', fontSize: '0.88rem', marginTop: '3px', fontWeight: '600' }}>📱 {appt.patientId?.phone}</div>
+                                        <div style={{ color: '#0369a1', fontSize: '0.88rem', marginTop: '3px', fontWeight: '700' }}>⌚ {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
+                                        {appt.reason && <div style={{ color: '#475569', fontSize: '0.85rem', marginTop: '4px', fontStyle: 'italic', fontWeight: '500' }}>"{appt.reason}"</div>}
+                                    </div>
                                 </div>
                                 <div className="patient-queue-actions">
                                     <span className={`badge ${getBadgeClass(appt.status)}`}>{appt.status}</span>

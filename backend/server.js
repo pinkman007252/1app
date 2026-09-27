@@ -28,6 +28,7 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 const path = require('path');
+const fs = require('fs');
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -35,17 +36,28 @@ app.use('/api/doctors', require('./routes/doctors'));
 app.use('/api/appointments', require('./routes/appointments'));
 app.use('/api/patients', require('./routes/patients'));
 
-// Removed Frontend Static Files Serving for Mobile API deployment
-app.get('/', (req, res) => {
-    res.json({ success: true, message: 'MediBook API is running successfully.' });
-});
+// Serve React Frontend static files if build directory exists
+const frontendBuildPath = path.join(__dirname, '../frontend/build');
+if (fs.existsSync(frontendBuildPath)) {
+    app.use(express.static(frontendBuildPath));
+    app.get('*', (req, res) => {
+        if (req.originalUrl.startsWith('/api')) {
+            return res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
+        }
+        res.sendFile(path.join(frontendBuildPath, 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.json({ success: true, message: 'MediBook API is running successfully.' });
+    });
 
-app.get('*', (req, res) => {
-    if (req.originalUrl.startsWith('/api')) {
-        return res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
-    }
-    res.status(404).json({ success: false, message: 'Route not found' });
-});
+    app.get('*', (req, res) => {
+        if (req.originalUrl.startsWith('/api')) {
+            return res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
+        }
+        res.status(404).json({ success: false, message: 'Route not found' });
+    });
+}
 
 // Global error handler
 app.use((err, req, res, next) => {
