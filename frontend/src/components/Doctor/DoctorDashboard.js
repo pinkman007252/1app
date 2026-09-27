@@ -80,23 +80,23 @@ const DoctorDashboard = () => {
 
                 {/* Token Stats */}
                 {tokenStats && (
-                    <div className="grid-4" style={{ marginBottom: '28px' }}>
+                    <div className="grid-4" style={{ marginBottom: '24px' }}>
                         {[
-                            { num: tokenStats.totalTokensIssued, label: 'Total Today', color: '' },
-                            { num: tokenStats.tokensCompleted, label: 'Completed', color: '#10b981' },
+                            { num: tokenStats.totalTokensIssued, label: 'Total Today', color: 'var(--color-landing-navy)' },
+                            { num: tokenStats.tokensCompleted, label: 'Completed', color: 'var(--color-success)' },
                             { num: tokenStats.tokensActive, label: 'Active', color: '#7c3aed' },
-                            { num: tokenStats.tokensCancelled, label: 'Cancelled', color: '#ef4444' }
+                            { num: tokenStats.tokensCancelled, label: 'Cancelled', color: 'var(--color-danger)' }
                         ].map(s => (
                             <div key={s.label} className="queue-card">
-                                <div className="queue-number" style={s.color ? { backgroundImage: `none`, color: s.color, WebkitTextFillColor: s.color } : {}}>{s.num || 0}</div>
+                                <div className="queue-number" style={{ color: s.color, WebkitTextFillColor: s.color }}>{s.num || 0}</div>
                                 <div className="queue-label">{s.label}</div>
                             </div>
                         ))}
                     </div>
                 )}
 
-                <h2 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '16px', color: '#f1f5f9' }}>
-                    📋 Patient Queue {isToday ? '(Today)' : `— ${new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`}
+                <h2 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>
+                    📋 Patient Queue {isToday ? '(Today)' : `— ${new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`}
                 </h2>
 
                 {loading ? (
@@ -104,25 +104,25 @@ const DoctorDashboard = () => {
                 ) : appointments.length === 0 ? (
                     <div className="empty-state glass-card"><div className="empty-state-icon">📅</div><h3>No appointments</h3><p>No appointments scheduled for this date</p></div>
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         {appointments.map(appt => (
                             <div key={appt._id} className="patient-queue-row">
                                 <div className="queue-token-badge">
                                     <div style={{ fontSize: '0.6rem', marginBottom: '2px' }}>TOKEN</div>
                                     <div style={{ fontSize: '0.85rem' }}>{appt.tokenNumber?.split('-T')[1] || '?'}</div>
                                 </div>
-                                <div style={{ flex: 1 }}>
-                                    <div style={{ fontWeight: '700', color: '#f1f5f9' }}>
+                                <div className="patient-queue-info" style={{ flex: 1 }}>
+                                    <div style={{ fontWeight: '700', color: 'var(--text-primary)', fontSize: '1.05rem' }}>
                                         {appt.patientId?.firstName} {appt.patientId?.lastName}
                                     </div>
-                                    <div style={{ color: '#64748b', fontSize: '0.82rem', marginTop: '2px' }}>📱 {appt.patientId?.phone}</div>
-                                    <div style={{ color: '#67e8f9', fontSize: '0.8rem', marginTop: '2px' }}>⌚ {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
-                                    {appt.reason && <div style={{ color: '#94a3b8', fontSize: '0.8rem', marginTop: '4px', fontStyle: 'italic' }}>"{appt.reason}"</div>}
+                                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '2px' }}>📱 {appt.patientId?.phone}</div>
+                                    <div style={{ color: 'var(--color-landing-navy)', fontSize: '0.85rem', marginTop: '2px', fontWeight: '600' }}>⌚ {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
+                                    {appt.reason && <div style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginTop: '4px', fontStyle: 'italic' }}>"{appt.reason}"</div>}
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+                                <div className="patient-queue-actions">
                                     <span className={`badge ${getBadgeClass(appt.status)}`}>{appt.status}</span>
                                     {['confirmed', 'pending', 'in-progress'].includes(appt.status) && (
-                                        <div style={{ display: 'flex', gap: '6px' }}>
+                                        <div style={{ display: 'flex', gap: '8px' }}>
                                             <button className="btn btn-success btn-sm" onClick={() => openComplete(appt)}>✅ Complete</button>
                                             <button className="btn btn-danger btn-sm" onClick={() => handleCancel(appt._id)}>✕</button>
                                         </div>

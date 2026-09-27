@@ -78,7 +78,7 @@ const DoctorProfile = () => {
                 {message.text && <div className={`alert alert-${message.type === 'success' ? 'success' : 'error'}`}>{message.type === 'success' ? '✅' : '⚠️'} {message.text}</div>}
 
                 <div className="glass-card" style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: '#f1f5f9' }}>⚙️ Availability & Fees</h3>
+                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: 'var(--text-primary)' }}>⚙️ Availability & Fees</h3>
                     <div className="form-row">
                         <div className="form-group">
                             <label className="form-label">Consultation Fee (₹)</label>
@@ -95,12 +95,12 @@ const DoctorProfile = () => {
                 </div>
 
                 <div className="glass-card" style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: '#f1f5f9' }}>🩺 Diseases & Expertise</h3>
+                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: 'var(--text-primary)' }}>🩺 Diseases & Expertise</h3>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '14px' }}>
                         {form.diseasesExpertise.map((exp, i) => (
-                            <span key={i} style={{ background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.25)', color: '#67e8f9', padding: '4px 14px', borderRadius: '999px', fontSize: '0.82rem', fontWeight: '500', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                            <span key={i} style={{ background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.25)', color: 'var(--color-landing-navy)', padding: '4px 14px', borderRadius: '999px', fontSize: '0.82rem', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                                 {exp}
-                                <button type="button" style={{ background: 'none', border: 'none', color: '#67e8f9', cursor: 'pointer', padding: '0', fontSize: '0.85rem' }} onClick={() => removeExpertise(i)}>✕</button>
+                                <button type="button" style={{ background: 'none', border: 'none', color: 'var(--color-landing-navy)', cursor: 'pointer', padding: '0', fontSize: '0.85rem' }} onClick={() => removeExpertise(i)}>✕</button>
                             </span>
                         ))}
                     </div>
@@ -111,7 +111,7 @@ const DoctorProfile = () => {
                 </div>
 
                 <div className="glass-card" style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontWeight: '700', marginBottom: '16px', color: '#f1f5f9' }}>📝 Professional Bio</h3>
+                    <h3 style={{ fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>📝 Professional Bio</h3>
                     <textarea className="form-input form-textarea" rows={5} placeholder="Describe your expertise, approach to patient care, notable achievements..." value={form.bio} onChange={e => setForm(p => ({ ...p, bio: e.target.value }))} />
                 </div>
 

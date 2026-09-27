@@ -92,7 +92,7 @@ const ScheduleManager = () => {
 
             <div className="glass-card">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                    <h3 style={{ fontWeight: '700', color: '#f1f5f9', fontSize: '1.15rem' }}>📅 {DAYS[selectedDay]}</h3>
+                    <h3 style={{ fontWeight: '700', color: 'var(--text-primary)', fontSize: '1.15rem' }}>📅 {DAYS[selectedDay]}</h3>
                     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                         <div className="form-group" style={{ margin: 0 }}>
                             <input type="date" className="form-input" style={{ width: 'auto' }} value={current.effectiveFrom?.split('T')[0] || ''} onChange={e => setSchedules(prev => ({ ...prev, [selectedDay]: { ...current, effectiveFrom: e.target.value } }))} />

@@ -71,6 +71,49 @@
     text-transform: uppercase;
 }
 
+.patient-queue-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    .queue-card {
+        padding: 16px 12px;
+    }
+    .queue-number {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .patient-queue-row {
+        flex-wrap: wrap;
+        padding: 16px;
+        gap: 12px;
+    }
+    .queue-token-badge {
+        align-self: flex-start;
+    }
+    .patient-queue-info {
+        min-width: 180px;
+    }
+    .patient-queue-actions {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+        border-top: 1px solid var(--color-border);
+        margin-top: 4px;
+    }
+}
+
 .complete-modal {
     padding: 20px 0;
 }
