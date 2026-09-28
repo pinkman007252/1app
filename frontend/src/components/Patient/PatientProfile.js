@@ -40,14 +40,14 @@ const PatientProfile = () => {
     const initials = `${authProfile?.firstName?.[0] || ''}${authProfile?.lastName?.[0] || ''}`.toUpperCase();
 
     return (
-        <div className="container page-enter">
-            <div className="page-header">
+        <div>
+            <div className="glass-card" style={{ marginBottom: '24px', padding: '24px' }}>
                 <div className="profile-header">
                     <div className="profile-avatar-lg">{initials}</div>
                     <div>
                         <div className="profile-name">{authProfile?.firstName} {authProfile?.lastName}</div>
                         <div className="profile-role">Patient</div>
-                        <div style={{ color: '#64748b', fontSize: '0.85rem', marginTop: '4px' }}>📱 {form?.phone} • 🏥 Total Visits: {authProfile?.visitHistory?.totalVisits || 0}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '4px' }}>📱 {form?.phone} • 🏥 Total Visits: {authProfile?.visitHistory?.totalVisits || 0}</div>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@ const PatientProfile = () => {
                 {message.text && <div className={`alert alert-${message.type === 'success' ? 'success' : 'error'}`}>{message.type === 'success' ? '✅' : '⚠️'} {message.text}</div>}
 
                 <div className="glass-card" style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: '#f1f5f9' }}>📞 Contact Information</h3>
+                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: 'var(--color-ink)' }}>📞 Contact Information</h3>
                     <div className="form-row">
                         <div className="form-group">
                             <label className="form-label">Phone</label>
@@ -90,7 +90,7 @@ const PatientProfile = () => {
                 </div>
 
                 <div className="glass-card" style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: '#f1f5f9' }}>🩺 Medical Details</h3>
+                    <h3 style={{ fontWeight: '700', marginBottom: '20px', color: 'var(--color-ink)' }}>🩺 Medical Details</h3>
                     <div className="form-group">
                         <label className="form-label">Blood Group</label>
                         <select className="form-input form-select" value={form?.medicalDetails?.bloodGroup || ''} onChange={e => setForm(p => ({ ...p, medicalDetails: { ...p.medicalDetails, bloodGroup: e.target.value } }))}>
@@ -118,7 +118,7 @@ const PatientProfile = () => {
                         <label className="form-label">Chronic Conditions</label>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                             {form?.medicalDetails?.chronicConditions?.map((c, i) => (
-                                <span key={i} className="medical-tag" style={{ background: 'rgba(6,182,212,0.12)', borderColor: 'rgba(6,182,212,0.25)', color: '#67e8f9' }}>{c}<button type="button" className="remove-btn" style={{ color: '#67e8f9' }} onClick={() => removeTag('chronicConditions', i)}>✕</button></span>
+                                <span key={i} className="medical-tag" style={{ background: 'rgba(47, 127, 234,0.12)', borderColor: 'rgba(47, 127, 234,0.25)', color: 'var(--color-primary-deep)' }}>{c}<button type="button" className="remove-btn" style={{ color: 'var(--color-primary-deep)' }} onClick={() => removeTag('chronicConditions', i)}>✕</button></span>
                             ))}
                         </div>
                         <div className="tag-input-row">
@@ -132,7 +132,7 @@ const PatientProfile = () => {
                         <label className="form-label">Current Medications</label>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                             {form?.medicalDetails?.currentMedications?.map((m, i) => (
-                                <span key={i} className="medical-tag" style={{ background: 'rgba(16,185,129,0.12)', borderColor: 'rgba(16,185,129,0.25)', color: '#6ee7b7' }}>{m}<button type="button" className="remove-btn" style={{ color: '#6ee7b7' }} onClick={() => removeTag('currentMedications', i)}>✕</button></span>
+                                <span key={i} className="medical-tag" style={{ background: 'rgba(16,185,129,0.12)', borderColor: 'rgba(16,185,129,0.25)', color: 'var(--color-success)' }}>{m}<button type="button" className="remove-btn" style={{ color: 'var(--color-success)' }} onClick={() => removeTag('currentMedications', i)}>✕</button></span>
                             ))}
                         </div>
                         <div className="tag-input-row">

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { appointmentsAPI } from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
+import DashboardCard from '../DashboardCard';
+import { DOCTOR_MENU } from '../../config/menuItems';
 import './Doctor.css';
 
 const formatDate = (d) => d.toISOString().split('T')[0];
-
 const PRESCRIPTION_TEMPLATE = { medicine: '', dosage: '', frequency: '', duration: '' };
 
 const DoctorDashboard = () => {
@@ -59,32 +60,41 @@ const DoctorDashboard = () => {
     return (
         <div className="container page-enter">
             <div className="page-header">
-                <div className="doctor-dash-hero">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
-                        <div>
-                            <div style={{ background: 'rgba(6,182,212,0.15)', border: '1px solid rgba(6,182,212,0.3)', color: '#67e8f9', padding: '5px 14px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: '600', display: 'inline-block', marginBottom: '12px' }}>
-                                🩺 Appointments Dashboard
-                            </div>
-                            <h1 style={{ fontSize: '1.8rem', fontWeight: '800', fontFamily: 'Outfit,sans-serif', color: '#f1f5f9' }}>
-                                Dr. {profile?.firstName} {profile?.lastName}
-                            </h1>
-                            <p style={{ color: '#94a3b8', marginTop: '4px' }}>{profile?.specialization} • {profile?.experience} years experience</p>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <label style={{ color: '#94a3b8', fontSize: '0.85rem' }}>Date:</label>
-                            <input type="date" className="form-input" style={{ width: 'auto' }} value={date} onChange={e => setDate(e.target.value)} max={''} />
-                            <button className="btn btn-secondary btn-sm" onClick={() => setDate(today)}>Today</button>
-                        </div>
+                <div className="doctor-dash-hero" style={{ background: 'var(--color-ink)', borderRadius: 'var(--radius-landing-card)', padding: '32px', marginBottom: '32px' }}>
+                    <div style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.9rem', fontWeight: 600, marginBottom: '8px' }}>
+                        🩺 Doctor Dashboard
                     </div>
+                    <h1 style={{ color: 'white', fontSize: '2rem', fontFamily: 'var(--font-heading)', margin: 0 }}>
+                        Dr. {profile?.firstName} {profile?.lastName}
+                    </h1>
                 </div>
+            </div>
 
+            <div className="grid-3" style={{ marginBottom: '40px' }}>
+                {DOCTOR_MENU.filter(m => m.path !== '/doctor/dashboard').map((item, idx) => (
+                    <DashboardCard key={idx} icon={item.icon} title={item.label} description={`Go to ${item.label}`} linkTo={item.path} highlight={item.label === 'Schedule'} />
+                ))}
+            </div>
+
+            <div id="appointments" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--color-ink)' }}>
+                    📋 Patient Queue {isToday ? '(Today)' : `— ${new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`}
+                </h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <label style={{ color: 'var(--color-ink-soft)', fontSize: '0.85rem' }}>Date:</label>
+                    <input type="date" className="form-input" style={{ width: 'auto', padding: '6px 12px' }} value={date} onChange={e => setDate(e.target.value)} max={''} />
+                    <button className="btn btn-secondary btn-sm" onClick={() => setDate(today)}>Today</button>
+                </div>
+            </div>
+
+            <div id="queue">
                 {/* Token Stats */}
                 {tokenStats && (
                     <div className="grid-4" style={{ marginBottom: '24px' }}>
                         {[
-                            { num: tokenStats.totalTokensIssued, label: 'Total Today', color: 'var(--color-landing-navy)' },
+                            { num: tokenStats.totalTokensIssued, label: 'Total Today', color: 'var(--color-ink)' },
                             { num: tokenStats.tokensCompleted, label: 'Completed', color: 'var(--color-success)' },
-                            { num: tokenStats.tokensActive, label: 'Active', color: '#7c3aed' },
+                            { num: tokenStats.tokensActive, label: 'Active', color: 'var(--color-secondary)' },
                             { num: tokenStats.tokensCancelled, label: 'Cancelled', color: 'var(--color-danger)' }
                         ].map(s => (
                             <div key={s.label} className="queue-card">
@@ -94,10 +104,6 @@ const DoctorDashboard = () => {
                         ))}
                     </div>
                 )}
-
-                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', marginBottom: '16px', color: '#0f172a' }}>
-                    📋 Patient Queue {isToday ? '(Today)' : `— ${new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`}
-                </h2>
 
                 {loading ? (
                     <div className="loading-container"><div className="spinner" /></div>
@@ -113,12 +119,12 @@ const DoctorDashboard = () => {
                                         <div style={{ fontSize: '0.9rem', fontWeight: '800' }}>{appt.tokenNumber?.split('-T')[1] || '?'}</div>
                                     </div>
                                     <div className="patient-queue-info" style={{ flex: 1 }}>
-                                        <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1.1rem' }}>
+                                        <div style={{ fontWeight: '800', color: 'var(--color-ink)', fontSize: '1.1rem' }}>
                                             {appt.patientId?.firstName} {appt.patientId?.lastName}
                                         </div>
-                                        <div style={{ color: '#334155', fontSize: '0.88rem', marginTop: '3px', fontWeight: '600' }}>📱 {appt.patientId?.phone}</div>
-                                        <div style={{ color: '#0369a1', fontSize: '0.88rem', marginTop: '3px', fontWeight: '700' }}>⌚ {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
-                                        {appt.reason && <div style={{ color: '#475569', fontSize: '0.85rem', marginTop: '4px', fontStyle: 'italic', fontWeight: '500' }}>"{appt.reason}"</div>}
+                                        <div style={{ color: 'var(--color-ink-soft)', fontSize: '0.88rem', marginTop: '3px', fontWeight: '600' }}>📱 {appt.patientId?.phone}</div>
+                                        <div style={{ color: 'var(--color-primary-cta)', fontSize: '0.88rem', marginTop: '3px', fontWeight: '700' }}>⌚ {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
+                                        {appt.reason && <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '4px', fontStyle: 'italic', fontWeight: '500' }}>"{appt.reason}"</div>}
                                     </div>
                                 </div>
                                 <div className="patient-queue-actions">
@@ -144,9 +150,9 @@ const DoctorDashboard = () => {
                             <h2 className="modal-title">Complete Appointment</h2>
                             <button className="modal-close" onClick={() => setCompleteModal(false)}>✕</button>
                         </div>
-                        <div style={{ padding: '12px', background: 'rgba(124,58,237,0.08)', borderRadius: '10px', marginBottom: '20px' }}>
-                            <strong style={{ color: '#f1f5f9' }}>{selectedAppt.patientId?.firstName} {selectedAppt.patientId?.lastName}</strong>
-                            <span style={{ color: '#64748b', fontSize: '0.85rem' }}> · {selectedAppt.timeSlot?.startTime} · {selectedAppt.reason}</span>
+                        <div style={{ padding: '12px', background: 'var(--color-accent-soft)', borderRadius: '10px', marginBottom: '20px' }}>
+                            <strong style={{ color: 'var(--color-ink)' }}>{selectedAppt.patientId?.firstName} {selectedAppt.patientId?.lastName}</strong>
+                            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}> · {selectedAppt.timeSlot?.startTime} · {selectedAppt.reason}</span>
                         </div>
                         {error && <div className="alert alert-error">⚠️ {error}</div>}
                         <div className="form-group">
@@ -167,7 +173,7 @@ const DoctorDashboard = () => {
                                     <div className="form-group" style={{ marginBottom: '0' }}><input className="form-input" placeholder="Frequency (e.g. Once daily)" value={p.frequency} onChange={e => updatePrescript(i, 'frequency', e.target.value)} /></div>
                                     <div className="form-group" style={{ marginBottom: '0' }}><input className="form-input" placeholder="Duration (e.g. 30 days)" value={p.duration} onChange={e => updatePrescript(i, 'duration', e.target.value)} /></div>
                                 </div>
-                                {i > 0 && <button style={{ marginTop: '8px', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem' }} onClick={() => removePrescript(i)}>Remove</button>}
+                                {i > 0 && <button style={{ marginTop: '8px', background: 'none', border: 'none', color: 'var(--color-danger)', cursor: 'pointer', fontSize: '0.8rem' }} onClick={() => removePrescript(i)}>Remove</button>}
                             </div>
                         ))}
                         <button className="btn btn-success btn-full btn-lg" style={{ marginTop: '20px' }} onClick={handleComplete} disabled={completing}>

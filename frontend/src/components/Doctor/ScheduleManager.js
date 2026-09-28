@@ -75,9 +75,14 @@ const ScheduleManager = () => {
 
     return (
         <div className="container page-enter">
-            <div className="page-header">
-                <h1 className="page-title">Schedule Manager</h1>
-                <p className="page-subtitle">Set your weekly working hours and breaks</p>
+            <div className="page-header glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px', padding: '24px', marginTop: '16px' }}>
+                <button onClick={() => window.history.back()} className="btn btn-secondary btn-sm" style={{ padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', width: '40px', height: '40px' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div>
+                    <h1 className="page-title" style={{ margin: 0 }}>Schedule Manager</h1>
+                    <p className="page-subtitle" style={{ marginTop: '4px', marginBottom: 0 }}>Set your weekly working hours and breaks</p>
+                </div>
             </div>
 
             {/* Day selector */}
@@ -115,11 +120,11 @@ const ScheduleManager = () => {
                                             <option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option>
                                         </select>
                                         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.85rem', color: '#94a3b8' }}>
+                                            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-ink-soft)' }}>
                                                 <input type="checkbox" checked={shift.isActive} onChange={e => updateShift(si, 'isActive', e.target.checked)} />
                                                 Active
                                             </label>
-                                            {current.shifts.length > 1 && <button style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '1rem' }} onClick={() => removeShift(si)}>🗑️</button>}
+                                            {current.shifts.length > 1 && <button style={{ background: 'none', border: 'none', color: 'var(--color-danger)', cursor: 'pointer', fontSize: '1rem' }} onClick={() => removeShift(si)}>🗑️</button>}
                                         </div>
                                     </div>
                                     <div className="form-row">
@@ -146,12 +151,12 @@ const ScheduleManager = () => {
                                     {shift.breakTimes?.map((br, bi) => (
                                         <div key={bi} className="break-item">
                                             <input type="time" className="form-input" style={{ width: 'auto' }} value={br.startTime} onChange={e => updateBreak(si, bi, 'startTime', e.target.value)} />
-                                            <span style={{ color: '#64748b', fontSize: '0.85rem' }}>to</span>
+                                            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>to</span>
                                             <input type="time" className="form-input" style={{ width: 'auto' }} value={br.endTime} onChange={e => updateBreak(si, bi, 'endTime', e.target.value)} />
                                             <select className="form-input form-select" style={{ width: 'auto' }} value={br.breakType} onChange={e => updateBreak(si, bi, 'breakType', e.target.value)}>
                                                 <option value="tea">Tea</option><option value="lunch">Lunch</option><option value="personal">Personal</option>
                                             </select>
-                                            <button style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }} onClick={() => removeBreak(si, bi)}>✕</button>
+                                            <button style={{ background: 'none', border: 'none', color: 'var(--color-danger)', cursor: 'pointer' }} onClick={() => removeBreak(si, bi)}>✕</button>
                                         </div>
                                     ))}
                                 </div>

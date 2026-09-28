@@ -66,6 +66,75 @@ router.get('/', async (req, res) => {
     }
 });
 
+// @route   GET /api/doctors/my-patients
+router.get('/my-patients', protect, authorize('doctor'), async (req, res) => {
+    try {
+        const doctor = await getDb().get('SELECT id FROM doctors WHERE userId = ?', req.user.id);
+        if (!doctor) return res.status(404).json({ success: false, message: 'Doctor profile not found' });
+
+        const patients = await getDb().all(`
+            SELECT DISTINCT p.id, p.firstName, p.lastName, u.email, p.phone 
+            FROM appointments a 
+            JOIN patients p ON a.patientId = p.id 
+            LEFT JOIN users u ON p.userId = u.id
+            WHERE a.doctorId = ?
+        `, doctor.id);
+
+        res.json({ success: true, count: patients.length, data: patients });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+// @route   GET /api/doctors/records
+router.get('/records', protect, authorize('doctor'), async (req, res) => {
+    try {
+        const doctor = await getDb().get('SELECT id FROM doctors WHERE userId = ?', req.user.id);
+        if (!doctor) return res.status(404).json({ success: false, message: 'Doctor profile not found' });
+
+        let query = `
+            SELECT a.*, 
+                   p.firstName as patientFirstName, p.lastName as patientLastName, u.email as patientEmail, p.phone as patientPhone,
+                   d.firstName as doctorFirstName, d.lastName as doctorLastName, d.specialization as doctorSpecialization
+            FROM appointments a
+            JOIN patients p ON a.patientId = p.id
+            LEFT JOIN users u ON p.userId = u.id
+            JOIN doctors d ON a.doctorId = d.id
+            WHERE a.doctorId = ? AND a.status = 'completed'
+        `;
+        const params = [doctor.id];
+
+        if (req.query.patientId) {
+            query += ' AND a.patientId = ?';
+            params.push(req.query.patientId);
+        }
+
+        query += ' ORDER BY a.appointmentDate DESC, a.timeSlotStart DESC';
+        const records = await getDb().all(query, ...params);
+
+        const mappedRecords = records.map(a => {
+            let parsedPrescription = [];
+            try { if (a.prescription) parsedPrescription = JSON.parse(a.prescription); } catch (e) { }
+            return {
+                _id: a.id,
+                patientId: { _id: a.patientId, firstName: a.patientFirstName, lastName: a.patientLastName, email: a.patientEmail, phone: a.patientPhone },
+                doctorId: { _id: a.doctorId, firstName: a.doctorFirstName, lastName: a.doctorLastName, specialization: a.doctorSpecialization },
+                appointmentDate: a.appointmentDate,
+                timeSlot: { startTime: a.timeSlotStart, endTime: a.timeSlotEnd },
+                status: a.status,
+                reason: a.reason,
+                doctorNotes: a.doctorNotes,
+                prescription: parsedPrescription,
+                tokenNumber: a.tokenNumber
+            };
+        });
+
+        res.json({ success: true, count: mappedRecords.length, data: mappedRecords });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
 // @route   GET /api/doctors/:id
 router.get('/:id', async (req, res) => {
     try {

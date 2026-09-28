@@ -38,19 +38,19 @@ const DoctorProfile = () => {
     const initials = `${authProfile?.firstName?.[0] || ''}${authProfile?.lastName?.[0] || ''}`.toUpperCase();
 
     return (
-        <div className="container page-enter">
-            <div className="page-header">
+        <div>
+            <div className="glass-card" style={{ marginBottom: '24px', padding: '24px' }}>
                 <div className="profile-header">
-                    <div className="profile-avatar-lg" style={{ background: 'linear-gradient(135deg,#06b6d4,#7c3aed)' }}>{initials}</div>
+                    <div className="profile-avatar-lg" style={{ background: 'linear-gradient(135deg,#06b6d4,var(--color-secondary))' }}>{initials}</div>
                     <div>
                         <div className="profile-name">Dr. {authProfile?.firstName} {authProfile?.lastName}</div>
-                        <div className="profile-role" style={{ color: '#67e8f9' }}>{authProfile?.specialization}</div>
-                        <div style={{ color: '#64748b', fontSize: '0.85rem', marginTop: '6px' }}>
+                        <div className="profile-role" style={{ color: 'var(--color-primary-deep)' }}>{authProfile?.specialization}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '6px' }}>
                             {authProfile?.qualification} • {authProfile?.experience} years • License: {authProfile?.licenseNumber}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
-                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: form.isAvailable ? '#10b981' : '#ef4444', boxShadow: form.isAvailable ? '0 0 8px #10b981' : '0 0 8px #ef4444' }} />
-                            <span style={{ fontSize: '0.85rem', color: form.isAvailable ? '#6ee7b7' : '#fca5a5', fontWeight: '600' }}>
+                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: form.isAvailable ? 'var(--color-success)' : 'var(--color-danger)', boxShadow: form.isAvailable ? '0 0 8px var(--color-success)' : '0 0 8px var(--color-danger)' }} />
+                            <span style={{ fontSize: '0.85rem', color: form.isAvailable ? 'var(--color-success)' : '#fca5a5', fontWeight: '600' }}>
                                 {form.isAvailable ? 'Available for Appointments' : 'Not Available'}
                             </span>
                         </div>
@@ -98,7 +98,7 @@ const DoctorProfile = () => {
                     <h3 style={{ fontWeight: '700', marginBottom: '20px', color: 'var(--text-primary)' }}>🩺 Diseases & Expertise</h3>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '14px' }}>
                         {form.diseasesExpertise.map((exp, i) => (
-                            <span key={i} style={{ background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.25)', color: 'var(--color-landing-navy)', padding: '4px 14px', borderRadius: '999px', fontSize: '0.82rem', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                            <span key={i} style={{ background: 'rgba(47, 127, 234,0.12)', border: '1px solid rgba(47, 127, 234,0.25)', color: 'var(--color-landing-navy)', padding: '4px 14px', borderRadius: '999px', fontSize: '0.82rem', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                                 {exp}
                                 <button type="button" style={{ background: 'none', border: 'none', color: 'var(--color-landing-navy)', cursor: 'pointer', padding: '0', fontSize: '0.85rem' }} onClick={() => removeExpertise(i)}>✕</button>
                             </span>

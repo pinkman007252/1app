@@ -41,6 +41,8 @@ export const authAPI = {
 export const doctorsAPI = {
     getAll: () => api.get('/doctors'),
     search: (query) => api.get(`/doctors/search?query=${encodeURIComponent(query)}`),
+    getMyPatients: () => api.get('/doctors/my-patients'),
+    getRecords: (patientId) => api.get(`/doctors/records${patientId ? `?patientId=${patientId}` : ''}`),
     getById: (id) => api.get(`/doctors/${id}`),
     getSchedule: (id) => api.get(`/doctors/${id}/schedule`),
     getAvailableSlots: (id, date) => api.get(`/doctors/${id}/available-slots?date=${date}`),

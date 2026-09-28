@@ -45,9 +45,14 @@ const AppointmentHistory = () => {
 
     return (
         <div className="container page-enter">
-            <div className="page-header">
-                <h1 className="page-title">My Appointments</h1>
-                <p className="page-subtitle">View and manage all your appointments</p>
+            <div className="page-header glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px', padding: '24px', marginTop: '16px' }}>
+                <button onClick={() => window.history.back()} className="btn btn-secondary btn-sm" style={{ padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', width: '40px', height: '40px' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div>
+                    <h1 className="page-title" style={{ margin: 0 }}>My Appointments</h1>
+                    <p className="page-subtitle" style={{ marginTop: '4px', marginBottom: 0 }}>View and manage all your appointments</p>
+                </div>
             </div>
 
             <div className="history-filters">
@@ -79,9 +84,9 @@ const AppointmentHistory = () => {
                                         <div className="appointment-month">{date.toLocaleString('default', { month: 'short' })}</div>
                                     </div>
                                     <div style={{ flex: 1 }}>
-                                        <div style={{ fontWeight: '700', color: '#f1f5f9' }}>Dr. {appt.doctorId?.firstName} {appt.doctorId?.lastName}</div>
-                                        <div style={{ color: '#67e8f9', fontSize: '0.83rem', marginTop: '2px' }}>{appt.doctorId?.specialization}</div>
-                                        <div style={{ color: '#64748b', fontSize: '0.8rem', marginTop: '4px' }}>🕐 {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
+                                        <div style={{ fontWeight: '700', color: 'var(--color-ink)' }}>Dr. {appt.doctorId?.firstName} {appt.doctorId?.lastName}</div>
+                                        <div style={{ color: 'var(--color-primary-deep)', fontSize: '0.83rem', marginTop: '2px' }}>{appt.doctorId?.specialization}</div>
+                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '4px' }}>🕐 {appt.timeSlot?.startTime} – {appt.timeSlot?.endTime}</div>
                                     </div>
                                     <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
                                         <span className={`badge ${getBadgeClass(appt.status)}`}>{appt.status}</span>
@@ -91,19 +96,19 @@ const AppointmentHistory = () => {
 
                                 {isExpanded && (
                                     <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '20px', background: 'rgba(0,0,0,0.15)' }}>
-                                        <div className="appointment-detail-row"><span className="detail-label">Token</span><span className="detail-value" style={{ fontFamily: 'monospace', color: '#a78bfa', fontWeight: '700' }}>{appt.tokenNumber}</span></div>
+                                        <div className="appointment-detail-row"><span className="detail-label">Token</span><span className="detail-value" style={{ fontFamily: 'monospace', color: 'var(--color-primary-cta)', fontWeight: '700' }}>{appt.tokenNumber}</span></div>
                                         <div className="appointment-detail-row"><span className="detail-label">Queue #</span><span className="detail-value">#{appt.queuePosition}</span></div>
                                         {appt.reason && <div className="appointment-detail-row"><span className="detail-label">Reason</span><span className="detail-value">{appt.reason}</span></div>}
                                         {appt.notes && <div className="appointment-detail-row"><span className="detail-label">Notes</span><span className="detail-value">{appt.notes}</span></div>}
                                         {appt.doctorNotes && (
                                             <div className="appointment-detail-row">
                                                 <span className="detail-label">Doctor Notes</span>
-                                                <span className="detail-value" style={{ color: '#6ee7b7' }}>{appt.doctorNotes}</span>
+                                                <span className="detail-value" style={{ color: 'var(--color-success)' }}>{appt.doctorNotes}</span>
                                             </div>
                                         )}
                                         {appt.prescription?.length > 0 && (
                                             <div style={{ marginTop: '14px' }}>
-                                                <p style={{ fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px', color: '#10b981', marginBottom: '8px' }}>💊 Prescription</p>
+                                                <p style={{ fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--color-success)', marginBottom: '8px' }}>💊 Prescription</p>
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                                     {appt.prescription.map((p, i) => (
                                                         <div key={i} className="prescription-item">

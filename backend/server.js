@@ -8,6 +8,8 @@ const { setupDatabase } = require('./config/db');
 // Connect Database
 setupDatabase();
 
+const app = express();
+
 // Trust proxy for Render / cloud reverse proxies
 app.set('trust proxy', 1);
 

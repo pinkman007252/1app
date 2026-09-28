@@ -64,9 +64,14 @@ const DoctorSearch = () => {
 
     return (
         <div className="container page-enter">
-            <div className="page-header">
-                <h1 className="page-title">Find a Doctor</h1>
-                <p className="page-subtitle">Search by specialization or medical condition</p>
+            <div className="page-header glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px', padding: '24px', marginTop: '16px' }}>
+                <button onClick={() => window.history.back()} className="btn btn-secondary btn-sm" style={{ padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', width: '40px', height: '40px' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div>
+                    <h1 className="page-title" style={{ margin: 0 }}>Find a Doctor</h1>
+                    <p className="page-subtitle" style={{ marginTop: '4px', marginBottom: 0 }}>Search by specialization or medical condition</p>
+                </div>
             </div>
 
             <div className="search-container" style={{ marginBottom: '16px' }}>
