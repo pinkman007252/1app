@@ -8,11 +8,12 @@ const { setupDatabase } = require('./config/db');
 // Connect Database
 setupDatabase();
 
-const app = express();
+// Trust proxy for Render / cloud reverse proxies
+app.set('trust proxy', 1);
 
-// Middleware
+// Middleware - allow all origins (web, mobile, capacitor)
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production' ? true : 'http://localhost:3000',
+    origin: true,
     credentials: true
 };
 app.use(cors(corsOptions));
@@ -22,7 +23,7 @@ app.use(morgan('dev'));
 // Rate Limiting
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100,
+    max: 200,
     message: { success: false, message: 'Too many requests from this IP, please try again later' }
 });
 app.use('/api/', limiter);
