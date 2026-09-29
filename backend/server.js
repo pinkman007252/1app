@@ -42,15 +42,9 @@ app.use('/api/patients', require('./routes/patients'));
 app.get('/api/debug-db', async (req, res) => {
     try {
         const { getDb } = require('./config/db');
-        const doctorId = '98443e12-2db6-4631-b144-8d647af0da52';
-        const appointmentDate = '2026-10-10';
-        const timeSlotStart = '09:00';
-        const existing = await getDb().get(`
-            SELECT id FROM appointments 
-            WHERE doctorId = ? AND date(appointmentDate) = date(?) AND timeSlotStart = ? AND status != 'cancelled'
-        `, doctorId, appointmentDate, timeSlotStart);
-        const apps = await getDb().all('SELECT * FROM appointments');
-        res.json({ existing, apps });
+        const count = await getDb().get('SELECT COUNT(*) as cnt FROM appointments');
+        const existing = await getDb().get("SELECT id FROM appointments WHERE doctorId = '98443e12-2db6-4631-b144-8d647af0da52'");
+        res.json({ count, existing });
     } catch (e) {
         res.status(500).json({ error: e.message });
     }
