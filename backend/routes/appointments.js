@@ -62,7 +62,7 @@ router.post('/', protect, authorize('patient'), async (req, res) => {
             WHERE doctorId = ? AND date(appointmentDate) = date(?) AND timeSlotStart = ? AND status != 'cancelled'
         `, doctorId, appointmentDate, timeSlot.startTime);
 
-        if (existing) return res.status(400).json({ success: false, message: 'This time slot is already booked' });
+        if (existing) return res.status(400).json({ success: false, message: 'DEBUG_EXISTING: This time slot is already booked' });
 
         const { tokenNumber, queuePosition } = await generateTokenNumber(doctorId, appointmentDate);
 
@@ -93,10 +93,8 @@ router.post('/', protect, authorize('patient'), async (req, res) => {
             data: { appointment: appointmentData, tokenInfo: { tokenNumber, queuePosition } }
         });
     } catch (error) {
-        if (error.message.includes('UNIQUE constraint failed')) {
-            return res.status(400).json({ success: false, message: 'This time slot is already booked' });
-        }
-        res.status(500).json({ success: false, message: error.message });
+        // Expose exact error for debugging
+        return res.status(400).json({ success: false, message: 'DEBUG_ERROR: ' + error.message });
     }
 });
 
