@@ -39,16 +39,6 @@ app.use('/api/doctors', require('./routes/doctors'));
 app.use('/api/appointments', require('./routes/appointments'));
 app.use('/api/patients', require('./routes/patients'));
 
-app.get('/api/debug-db', async (req, res) => {
-    try {
-        const { getDb } = require('./config/db');
-        const count = await getDb().get('SELECT COUNT(*) as cnt FROM appointments');
-        const existing = await getDb().get("SELECT id FROM appointments WHERE doctorId = '98443e12-2db6-4631-b144-8d647af0da52'");
-        res.json({ count, existing });
-    } catch (e) {
-        res.status(500).json({ error: e.message });
-    }
-});
 // Serve React Frontend static files if build directory exists
 const frontendBuildPath = path.join(__dirname, '../frontend/build');
 if (fs.existsSync(frontendBuildPath)) {

@@ -15,7 +15,11 @@ class AsyncDbWrapper {
 
     async get(sql, ...params) {
         const stmt = this._db.prepare(sql);
-        return stmt.get(...params.flat());
+        const row = stmt.get(...params.flat());
+        if (row && Object.keys(row).length > 0 && Object.values(row).every(v => v === null)) {
+            return undefined;
+        }
+        return row;
     }
 
     async all(sql, ...params) {
