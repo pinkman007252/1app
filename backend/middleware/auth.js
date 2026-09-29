@@ -19,6 +19,24 @@ const protect = async (req, res, next) => {
         if (!req.user) {
             return res.status(401).json({ success: false, message: 'Not authorized, user not found' });
         }
+        
+        // Self-healing: If role is null or undefined in the database for some reason, fix it
+        if (!req.user.role || req.user.role === 'null') {
+            const isPatient = await getDb().get('SELECT id FROM patients WHERE userId = ?', req.user.id);
+            if (isPatient) {
+                await getDb().run('UPDATE users SET role = ? WHERE id = ?', 'patient', req.user.id);
+                req.user.role = 'patient';
+            } else {
+                const isDoctor = await getDb().get('SELECT id FROM doctors WHERE userId = ?', req.user.id);
+                if (isDoctor) {
+                    await getDb().run('UPDATE users SET role = ? WHERE id = ?', 'doctor', req.user.id);
+                    req.user.role = 'doctor';
+                } else {
+                    req.user.role = 'patient'; // Default fallback
+                }
+            }
+        }
+        
         next();
     } catch (error) {
         return res.status(401).json({ success: false, message: 'Not authorized, invalid token' });
