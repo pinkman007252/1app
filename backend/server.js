@@ -39,6 +39,15 @@ app.use('/api/doctors', require('./routes/doctors'));
 app.use('/api/appointments', require('./routes/appointments'));
 app.use('/api/patients', require('./routes/patients'));
 
+app.get('/api/debug-db', async (req, res) => {
+    try {
+        const { getDb } = require('./config/db');
+        const apps = await getDb().all('SELECT * FROM appointments');
+        res.json(apps);
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
 // Serve React Frontend static files if build directory exists
 const frontendBuildPath = path.join(__dirname, '../frontend/build');
 if (fs.existsSync(frontendBuildPath)) {
